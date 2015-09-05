@@ -60,4 +60,30 @@ class BstTest < Minitest::Test
 
    assert_equal 5, tree.head.right.right.right.right.data
  end
+
+ def test_include_verifys_a_value
+   tree = Bst.new
+   tree.insert(6)
+   tree.insert(5)
+   tree.insert(7)
+   tree.insert(4)
+   tree.insert(8)
+   tree.insert(3)
+   tree.insert(9)
+
+   assert tree.include?(8)
+ end
+
+ def test_include_rejects_a_value
+   tree = Bst.new
+   tree.insert(6)
+   tree.insert(5)
+   tree.insert(7)
+   tree.insert(4)
+   tree.insert(8)
+   tree.insert(3)
+   tree.insert(9)
+
+   refute tree.include?(10)
+ end
 end
