@@ -24,8 +24,19 @@ class Bst
 
   def include?(data)
     return true if data == @head.data
-    cursor = traverse_and_find(data)
+    cursor = find_traverse(data)
     data == cursor.data ? true : false
+  end
+
+  def depth_of(data)
+    depth = 0
+    return nil if !head
+    if data == @head.data
+      depth += 1
+    else
+      #do this
+    end
+    depth
   end
 
   def traverse(data, cursor=@head)
@@ -40,8 +51,7 @@ class Bst
     return cursor
   end
 
-  def traverse_and_find(data, cursor=@head)
-
+  def find_traverse(data, cursor=@head)
     if data < cursor.data && !cursor.left.nil?
       cursor = cursor.left
       cursor = traverse(data, cursor) if data < cursor.data && !cursor.left.nil?
