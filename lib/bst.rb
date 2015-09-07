@@ -52,16 +52,43 @@ class Bst
 
   def include?(data)
     return true if data == @head.data
-    find_traverse(data)
-    data == @cursordata ? true : false
+    cursor = find_traverse(data)
+    return false if cursor == nil
+    data == cursor.data ? true : false
   end
 
   def find_traverse(data, cursor=@head)
-    find_traverse(data, cursor.left) if !cursor.left.nil?
-    @cursordata = cursor.data if data == cursor.data
-    #return cursor.data if cursor.data == data
-    find_traverse(data, cursor.right) if !cursor.right.nil?
+    while !cursor.nil?
+      if data == cursor.data
+        return cursor
+      elsif data < cursor.data
+        cursor = cursor.left
+      else
+        cursor = cursor.right
+      end
+    end
   end
+
+  # def find_traverse(data, cursor=@head)
+  #   if data < cursor.data && !cursor.left.nil?
+  #     cursor = cursor.left
+  #     cursor = traverse(data, cursor) if data < cursor.data && !cursor.left.nil?
+  #   elsif data > cursor.data && !cursor.right.nil?
+  #     cursor = cursor.right
+  #     cursor = traverse(data, cursor) if data > cursor.data && !cursor.right.nil?
+  #   end
+  #   return cursor
+  # end
+
+  # def find_traverse(data, cursor=@head)
+  #   if !cursor.left.nil?
+  #     cursor = find_traverse(data, cursor.left)
+  #     return cursor if cursor.data == data
+  #   elsif !cursor.right.nil?
+  #     cursor = find_traverse(data, cursor.right)
+  #     return cursor if cursor.data == data
+  #   end
+  # end
 
   def depth_of(data)
     depth = 0
@@ -100,17 +127,6 @@ class Bst
     sort_traverse(sorted, cursor.right)
     sorted
   end
-
-  # def find_traverse(data, cursor=@head)
-  #   if data < cursor.data && !cursor.left.nil?
-  #     cursor = cursor.left
-  #     cursor = traverse(data, cursor) if data < cursor.data && !cursor.left.nil?
-  #   elsif data > cursor.data && !cursor.right.nil?
-  #     cursor = cursor.right
-  #     cursor = traverse(data, cursor) if data > cursor.data && !cursor.right.nil?
-  #   end
-  #   return cursor
-  # end
 end
 
 # tree = Bst.new
