@@ -114,6 +114,41 @@ class Bst
     counted.length
   end
 
+  def delete(data)
+    if data == head.data
+      delete_head
+      return
+    end
+    cursor = delete_traverse(data)
+    if !cursor.left.left.nil?
+      cursor.left = cursor.left.left
+    elsif !cursor.right.right.nil?
+      cursor.right = cursor.right.right
+    end
+  end
+
+  def delete_traverse(data, cursor=@head)
+    while !cursor.nil?
+      if data == cursor.left.data || data == cursor.right.data
+        return cursor
+      elsif data < cursor.data
+        cursor = cursor.left
+      else
+        cursor = cursor.right
+      end
+    end
+  end
+
+  def delete_head
+    if @head.left.nil? && @head.right.nil?
+      @head == nil
+    elsif !head.left.nil?
+      binding.pry
+      @head = @head.left
+    else
+      @head = @head.right
+    end
+  end
 end
 
 
