@@ -155,4 +155,18 @@ class BstTest < Minitest::Test
     assert_equal [1, 2, 3, 4, 8, 9, 12, 14], tree.sort
   end
 
+  def test_count_calculates_total
+    tree = Bst.new
+    tree.insert(8)
+    tree.insert(4)
+    tree.insert(12)
+    tree.insert(2)
+    tree.insert(3)
+    tree.insert(9)
+    tree.insert(14)
+    tree.insert(1)
+
+    assert_equal 8, tree.count
+  end
+
 end

@@ -107,7 +107,15 @@ class Bst
     sort_traverse(sorted, cursor.right)
     sorted
   end
+
+  def count             # Extension
+    counted = []
+    sort_traverse(counted)
+    counted.length
+  end
+
 end
+
 
 # tree = Bst.new
 # File.open('input.txt').readlines.each do |line|
