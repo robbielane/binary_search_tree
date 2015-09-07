@@ -112,7 +112,7 @@ class BstTest < Minitest::Test
     tree.insert(5)
     tree.insert(4)
 
-    assert_equal 3, tree.depth_of(5)
+    assert_equal 4, tree.depth_of(8)
   end
 
   def test_maximum_finds_highest_value

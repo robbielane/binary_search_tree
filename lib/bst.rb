@@ -69,27 +69,6 @@ class Bst
     end
   end
 
-  # def find_traverse(data, cursor=@head)
-  #   if data < cursor.data && !cursor.left.nil?
-  #     cursor = cursor.left
-  #     cursor = traverse(data, cursor) if data < cursor.data && !cursor.left.nil?
-  #   elsif data > cursor.data && !cursor.right.nil?
-  #     cursor = cursor.right
-  #     cursor = traverse(data, cursor) if data > cursor.data && !cursor.right.nil?
-  #   end
-  #   return cursor
-  # end
-
-  # def find_traverse(data, cursor=@head)
-  #   if !cursor.left.nil?
-  #     cursor = find_traverse(data, cursor.left)
-  #     return cursor if cursor.data == data
-  #   elsif !cursor.right.nil?
-  #     cursor = find_traverse(data, cursor.right)
-  #     return cursor if cursor.data == data
-  #   end
-  # end
-
   def depth_of(data)
     depth = 0
     return nil if !head
@@ -102,16 +81,17 @@ class Bst
   end
 
   def find_depth_traverse(data, depth=1, cursor=@head)
-    if data < cursor.data && !cursor.left.nil?
-      cursor = cursor.left
-      depth += 1
-      cursor = find_depth_traverse(data, depth, cursor) if cursor.data != data
-    elsif data > cursor.data && !cursor.right.nil?
-      cursor = cursor.right
-      depth += 1
-      cursor = find_depth_traverse(data, depth, cursor) if cursor.data != data
+    while !cursor.nil?
+      if data == cursor.data
+        return depth
+      elsif data < cursor.data
+        cursor = cursor.left
+        depth += 1
+      else
+        cursor = cursor.right
+        depth += 1
       end
-    depth
+    end
   end
 
   def sort
