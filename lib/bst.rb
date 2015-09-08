@@ -175,12 +175,3 @@ class Bst
     end
   end
 end
-
-
-# tree = Bst.new
-# File.open('input.txt').readlines.each do |line|
-#   tree.insert(line.chomp.to_i)
-# end
-# p tree
-#
-# tree.traverse_all
