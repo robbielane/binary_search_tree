@@ -94,6 +94,28 @@ class Bst
     end
   end
 
+  def max_depth(cursor=@head, heights=[])
+    return 0 if @head.nil?
+    max_depth(cursor.left, heights) if cursor.left
+    heights << depth_of(cursor.data)
+    max_depth(cursor.right, heights) if cursor.right
+    heights.max
+  end
+
+
+  # def max_depth(depth=0, cursor=@head)
+  #   while !cursor.nil?
+  #     if !cursor.left.nil?
+  #       cursor = cursor.left
+  #       depth += 1
+  #     else
+  #       cursor = cursor.right
+  #       depth += 1
+  #     end
+  #   end
+  #   depth
+  # end
+
   def sort
     sorted = []
     sort_traverse(sorted)

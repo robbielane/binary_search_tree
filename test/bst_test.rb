@@ -180,7 +180,7 @@ class BstTest < Minitest::Test
     tree.insert(14)
     tree.insert(1)
     tree.delete(14)
-    
+
     refute tree.include?(14)
     assert_equal nil, tree.head.right.right
   end
@@ -213,4 +213,23 @@ class BstTest < Minitest::Test
     assert_equal 4, tree.head.data
   end
 
+  def test_max_depth_returns_0
+    tree = Bst.new
+
+    assert_equal 0, tree.max_depth
+  end
+
+  def test_max_depth_returns_max_depth
+    tree = Bst.new
+    tree.insert(8)
+    tree.insert(4)
+    tree.insert(12)
+    tree.insert(2)
+    tree.insert(3)
+    tree.insert(9)
+    tree.insert(14)
+    tree.insert(1)
+
+    assert_equal 4, tree.max_depth
+  end
 end
