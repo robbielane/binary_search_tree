@@ -169,6 +169,22 @@ class BstTest < Minitest::Test
     assert_equal 8, tree.count
   end
 
+  def test_delete_removes_bottom_node_and_repairs
+    tree = Bst.new
+    tree.insert(8)
+    tree.insert(4)
+    tree.insert(12)
+    tree.insert(2)
+    tree.insert(3)
+    tree.insert(9)
+    tree.insert(14)
+    tree.insert(1)
+    tree.delete(14)
+    
+    refute tree.include?(14)
+    assert_equal nil, tree.head.right.right
+  end
+
   def test_delete_removes_and_repairs
     tree = Bst.new
     tree.insert(8)
@@ -179,10 +195,11 @@ class BstTest < Minitest::Test
     tree.insert(9)
     tree.insert(14)
     tree.insert(1)
-    tree.delete(4)
+    tree.delete(2)
 
-    refute tree.include?(4)
-    assert_equal 2, tree.head.left.data
+    refute tree.include?(2)
+    assert_equal 1, tree.head.left.left.data
+    assert_equal 3, tree.head.left.left.right.data
   end
 
   def test_delete_removes_head_and_repairs

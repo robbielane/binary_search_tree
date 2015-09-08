@@ -120,18 +120,44 @@ class Bst
       return
     end
     cursor = delete_traverse(data)
-    if !cursor.left.left.nil?
-      cursor.left = cursor.left.left
-    elsif !cursor.right.right.nil?
-      cursor.right = cursor.right.right
+    if data <= cursor.data && !cursor.left.nil?
+      delete_left(cursor)
+    elsif data > cursor.data && !cursor.right.nil?
+      delete_right(cursor)
     end
+  end
+
+  def delete_right(cursor)
+    if !cursor.right.left.nil?
+      temp = cursor.right.right
+      cursor.right = cursor.right.left
+      cursor.right.right = temp
+    elsif !cursor.right.right.nil?
+      temp = cursor.right.left
+      cursor.right = cursor.right.right
+      cursor.right.left = temp
+    end
+    cursor.right = nil if cursor.right.right.nil? && cursor.right.left.nil?
+  end
+
+  def delete_left(cursor)
+    if !cursor.left.left.nil?
+      temp = cursor.left.right
+      cursor.left = cursor.left.left
+      cursor.left.right = temp
+    elsif !cursor.left.right.nil?
+      temp = cursor.left.left
+      cursor.left = cursor.left.right
+      cursor.left.left = temp
+    end
+    cursor.left = nil if cursor.left.left.nil? && cursor.left.right.nil?
   end
 
   def delete_traverse(data, cursor=@head)
     while !cursor.nil?
-      if data == cursor.left.data || data == cursor.right.data
-        return cursor
-      elsif data < cursor.data
+      return cursor if !cursor.left.nil? && data == cursor.left.data
+      return cursor if !cursor.right.nil? && data == cursor.right.data
+      if data <= cursor.data
         cursor = cursor.left
       else
         cursor = cursor.right
@@ -143,7 +169,6 @@ class Bst
     if @head.left.nil? && @head.right.nil?
       @head == nil
     elsif !head.left.nil?
-      binding.pry
       @head = @head.left
     else
       @head = @head.right
